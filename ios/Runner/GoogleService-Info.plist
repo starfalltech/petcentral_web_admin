@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>678128574139-0muijbltupnq93js3oekv7ui6tfmm49f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.678128574139-0muijbltupnq93js3oekv7ui6tfmm49f</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>678128574139-t3pqhq0iars8pb1ntaegn473nrrcndtg.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBg_N8AjrIS9MXTEdUvWie-Hlg52JtvGjw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>678128574139</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.petcentralWebAdmin</string>
+	<key>PROJECT_ID</key>
+	<string>petcentral-e79ae</string>
+	<key>STORAGE_BUCKET</key>
+	<string>petcentral-e79ae.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:678128574139:ios:75a3a94146cc6f542ed39e</string>
+</dict>
+</plist>

@@ -1,0 +1,64 @@
+{
+  "offices": [
+    {
+      "address": "Los Angeles, California 90012, Amerika Serikat",
+      "id": 0,
+      "image": "https://lh3.googleusercontent.com/tpBMFN5os8K-qXIHiAX5SZEmN5fCzIGrj9FdJtbZPUkC91ookSoY520NYn7fK5yqmh1L1m3F2SJA58v6Qps3JusdrxoFSwk6Ajv2K88",
+      "lat": 34.052684,
+      "lng": -118.247155,
+      "name": "car and motor",
+      "phone": "",
+      "region": "europe"
+    },
+    {
+      "address": "Los Angeles, California 90012, Amerika Serikat",
+      "id": 1,
+      "image": "https://lh3.googleusercontent.com/tpBMFN5os8K-qXIHiAX5SZEmN5fCzIGrj9FdJtbZPUkC91ookSoY520NYn7fK5yqmh1L1m3F2SJA58v6Qps3JusdrxoFSwk6Ajv2K88",
+      "lat": 34.053744,
+      "lng": -118.252298,
+      "name": "office 1",
+      "phone": "",
+      "region": "europe"
+    },
+    {
+      "address": "Los Angeles, California 90012, Amerika Serikat",
+      "id": 2,
+      "image": "https://lh3.googleusercontent.com/tpBMFN5os8K-qXIHiAX5SZEmN5fCzIGrj9FdJtbZPUkC91ookSoY520NYn7fK5yqmh1L1m3F2SJA58v6Qps3JusdrxoFSwk6Ajv2K88",
+      "lat": 34.050971,
+      "lng": -118.251483,
+      "name": "car and motor2",
+      "phone": "",
+      "region": "europe"
+    },
+    {
+      "address": "Los Angeles, California 90012, Amerika Serikat",
+      "id": 3,
+      "image": "https://lh3.googleusercontent.com/tpBMFN5os8K-qXIHiAX5SZEmN5fCzIGrj9FdJtbZPUkC91ookSoY520NYn7fK5yqmh1L1m3F2SJA58v6Qps3JusdrxoFSwk6Ajv2K88",
+      "lat": 34.052949,
+      "lng": -118.244462,
+      "name": "car and motor3",
+      "phone": "",
+      "region": "europe"
+    },
+    {
+      "address": "Los Angeles, California 90012, Amerika Serikat",
+      "id": 4,
+      "image": "https://lh3.googleusercontent.com/tpBMFN5os8K-qXIHiAX5SZEmN5fCzIGrj9FdJtbZPUkC91ookSoY520NYn7fK5yqmh1L1m3F2SJA58v6Qps3JusdrxoFSwk6Ajv2K88",
+      "lat": 34.057970,
+      "lng": -118.237166,
+      "name": "car and motor4",
+      "phone": "",
+      "region": "europe"
+    },
+    {
+      "address": "Los Angeles, California 90012, Amerika Serikat",
+      "id": 5,
+      "image": "https://lh3.googleusercontent.com/tpBMFN5os8K-qXIHiAX5SZEmN5fCzIGrj9FdJtbZPUkC91ookSoY520NYn7fK5yqmh1L1m3F2SJA58v6Qps3JusdrxoFSwk6Ajv2K88",
+      "lat": 34.051302,
+      "lng": -118.234376,
+      "name": "car and motor5",
+      "phone": "",
+      "region": "europe"
+    }
+  ]
+}

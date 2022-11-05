@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "678128574139",
+    "project_id": "petcentral-e79ae",
+    "storage_bucket": "petcentral-e79ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678128574139:android:e6065fb5923034d32ed39e",
+        "android_client_info": {
+          "package_name": "com.example.petcentral_web_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678128574139-j0i368ojirjkh6adk0r5bshk89et2b82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpI7PwfVaTEEOvJ9-n9DMo7k0-j25GAck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678128574139-j0i368ojirjkh6adk0r5bshk89et2b82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678128574139:android:70362e357002e8d22ed39e",
+        "android_client_info": {
+          "package_name": "com.petcentral.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "678128574139-t3pqhq0iars8pb1ntaegn473nrrcndtg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petcentral.app",
+            "certificate_hash": "351071bd9e77c90c093d7863d23303e5dacf3463"
+          }
+        },
+        {
+          "client_id": "678128574139-j0i368ojirjkh6adk0r5bshk89et2b82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpI7PwfVaTEEOvJ9-n9DMo7k0-j25GAck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "678128574139-j0i368ojirjkh6adk0r5bshk89et2b82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
