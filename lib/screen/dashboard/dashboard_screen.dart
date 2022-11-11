@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:petcentral_web_admin/const/colors_const.dart';
+import 'package:petcentral_web_admin/main.dart';
 import 'package:sidebarx/sidebarx.dart';
 import 'package:sizer/sizer.dart';
 
@@ -78,8 +80,8 @@ class DrawerSidebarX extends StatelessWidget {
       },
       items: [
         SidebarXItem(
-          icon: Icons.home,
-          label: 'Summary',
+          icon: Icons.person_pin,
+          label: 'User List',
           onTap: () {
             debugPrint('Home');
           },
@@ -88,9 +90,10 @@ class DrawerSidebarX extends StatelessWidget {
           icon: Icons.bathtub,
           label: 'Grooming',
         ),
+
         const SidebarXItem(
-          icon: Icons.menu_open,
-          label: 'Booking',
+          icon: Icons.hotel_rounded,
+          label: 'Hotel',
         ),
         const SidebarXItem(
           icon: Icons.chat_bubble_rounded,
@@ -107,6 +110,13 @@ class DrawerSidebarX extends StatelessWidget {
         const SidebarXItem(
           icon: Icons.store_outlined,
           label: 'Store',
+        ),
+        SidebarXItem(
+          icon: Icons.logout_rounded,
+          label: 'Logout',
+          onTap: () {
+            Get.offAll(() => LoginScreen());
+          },
         ),
         // const SidebarXItem(
         //   iconWidget: FlutterLogo(size: 20),

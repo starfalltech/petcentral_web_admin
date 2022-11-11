@@ -1,18 +1,22 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:petcentral_web_admin/const/colors_const.dart';
 import 'package:petcentral_web_admin/primary_button.dart';
 import 'package:petcentral_web_admin/screen/dashboard/dashboard_screen.dart';
 import 'package:petcentral_web_admin/screen/dashboard/screen_one.dart';
 import 'package:sidebarx/sidebarx.dart';
+import 'package:http/http.dart' as http;
 import 'package:sizer/sizer.dart';
 
 void main() {
   runApp(Sizer(
     builder: ((context, orientation, deviceType) {
-      return const MyApp();
+      return const ProviderScope(child: MyApp());
     }),
   ));
 }
@@ -48,6 +52,35 @@ class LoginScreen extends StatelessWidget {
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
 
+  final TextEditingController usr = TextEditingController();
+  final TextEditingController pss = TextEditingController();
+
+  Future<void> postLogin(String usr, pss) async {
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request(
+        'POST', Uri.parse('https://api.petcentral.id/auth/admin/signin'));
+    request.body = json.encode({"email": usr, "password": pss});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      debugPrint(await response.stream.bytesToString());
+      Get.offAll(() => DashBoardScreenX(
+            keys: _key,
+            controller: _controller,
+          ));
+    } else {
+      debugPrint(response.reasonPhrase);
+      Get.snackbar(
+        'Error',
+        'No User Found',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +104,7 @@ class LoginScreen extends StatelessWidget {
                             'This is Login',
                             style: GoogleFonts.livvic(
                               fontWeight: FontWeight.w600,
-                              color: Color(0xff363636),
+                              color: const Color(0xff363636),
                               fontSize: 24,
                             ),
                           ),
@@ -94,6 +127,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         width: 30.w,
                         child: TextFormField(
+                          controller: usr,
                           decoration: InputDecoration(
                             labelText: "Enter Email",
                             fillColor: Colors.white,
@@ -117,6 +151,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         width: 30.w,
                         child: TextFormField(
+                          controller: pss,
                           decoration: InputDecoration(
                             labelText: "Enter Password",
                             fillColor: Colors.white,
@@ -139,6 +174,7 @@ class LoginScreen extends StatelessWidget {
                       const Gap(20),
                       PrimaryButton(
                         onPress: () {
+                          // postLogin(usr.text, pss.text);
                           Get.offAll(() => DashBoardScreenX(
                                 keys: _key,
                                 controller: _controller,

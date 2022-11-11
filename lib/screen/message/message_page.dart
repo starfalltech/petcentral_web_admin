@@ -71,7 +71,7 @@ class _MessagePageState extends State<MessagePage> {
       child: Row(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width * 0.5,
             height: 57,
             margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
             decoration: BoxDecoration(
@@ -572,7 +572,7 @@ class _MessagePageState extends State<MessagePage> {
   Widget _buildListCht() {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.only(left: 60, right: 30),
+        padding: const EdgeInsets.only(left: 20, right: 30),
         child: ListView.builder(
           itemBuilder: (BuildContext c, int i) {
             return Container(
@@ -624,7 +624,7 @@ class _MessagePageState extends State<MessagePage> {
                       Padding(
                         padding: const EdgeInsets.only(top: 6.0),
                         child: SizedBox(
-                          width: 200,
+                          width: 150,
                           child: Text(
                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam',
                             style: TextStyle(
