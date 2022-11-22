@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:petcentral_web_admin/api_services/secure_storage.dart';
 import 'package:petcentral_web_admin/const/colors_const.dart';
 import 'package:petcentral_web_admin/primary_button.dart';
 import 'package:petcentral_web_admin/screen/dashboard/dashboard_screen.dart';
@@ -65,11 +66,14 @@ class LoginScreen extends StatelessWidget {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      debugPrint(await response.stream.bytesToString());
-      Get.offAll(() => DashBoardScreenX(
-            keys: _key,
-            controller: _controller,
-          ));
+      await response.stream.bytesToString().then((value) async {
+        final Map map = jsonDecode(value);
+        await SecureStorage().writeSecureData('userId', map['userId']);
+        Get.offAll(() => DashBoardScreenX(
+              keys: _key,
+              controller: _controller,
+            ));
+      });
     } else {
       debugPrint(response.reasonPhrase);
       Get.snackbar(
@@ -173,12 +177,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const Gap(20),
                       PrimaryButton(
-                        onPress: () {
-                          // postLogin(usr.text, pss.text);
-                          Get.offAll(() => DashBoardScreenX(
-                                keys: _key,
-                                controller: _controller,
-                              ));
+                        onPress: () async {
+                          await postLogin(usr.text, pss.text);
                         },
                         txtButton: 'Login',
                       )
