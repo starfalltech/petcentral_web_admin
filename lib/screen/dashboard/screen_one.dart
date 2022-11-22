@@ -1,12 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_0.dart';
-import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_1.dart';
-import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_2.dart';
-import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_3.dart';
-import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_4.dart';
+import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_customer.dart';
+import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_grooming.dart';
+import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_booking_hotel.dart';
+import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_all_pet.dart';
+import 'package:petcentral_web_admin/screen/dashboard/screen_modular/service_screen.dart';
 import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_5.dart';
 import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_6.dart';
-import 'package:petcentral_web_admin/screen/message/message_page.dart';
+import 'package:petcentral_web_admin/screen/dashboard/screen_modular/screen_message.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 class ScreenOne extends StatelessWidget {
@@ -23,7 +25,7 @@ class ScreenOne extends StatelessWidget {
     return AnimatedBuilder(
       animation: controller,
       builder: (context, child) {
-        final pageTitle = _getTitleByIndex(controller.selectedIndex);
+        // final pageTitle = _getTitleByIndex(controller.selectedIndex);
         switch (controller.selectedIndex) {
           case 0:
             return CustomerListScreen();
@@ -34,39 +36,18 @@ class ScreenOne extends StatelessWidget {
           case 3:
             return MessagePage();
           case 4:
-            return ScreenEmpat();
+            return GetAllPet();
           case 5:
-            return ScreenLima();
+            return ServiceScreen();
           case 6:
             return ScreenEnam();
           default:
             return Text(
-              pageTitle,
+              'Not Found',
               style: theme.textTheme.headlineSmall,
             );
         }
       },
     );
-  }
-}
-
-String _getTitleByIndex(int index) {
-  switch (index) {
-    case 0:
-      return 'Home';
-    case 1:
-      return 'Search';
-    case 2:
-      return 'People';
-    case 3:
-      return 'Favorites';
-    case 4:
-      return 'Custom iconWidget';
-    case 5:
-      return 'Profile';
-    case 6:
-      return 'Settings';
-    default:
-      return 'Not found page';
   }
 }

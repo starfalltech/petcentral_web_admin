@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:petcentral_web_admin/api_services/api_services.dart';
+import 'package:petcentral_web_admin/model/all_pet_model.dart';
 import 'package:petcentral_web_admin/model/customer_model.dart';
 import 'package:petcentral_web_admin/model/grooming_detail_model.dart';
 import 'package:petcentral_web_admin/model/grooming_model.dart';
@@ -46,7 +47,21 @@ final reservationListRejected =
   return ref.watch(customerProvider).getReservationListRejected();
 });
 
+final reservationCheckInList =
+    FutureProvider.autoDispose<List<ReservationListModel>>((ref) async {
+  return ref.watch(customerProvider).checkIn();
+});
+
+final reservationCheckOutList =
+    FutureProvider.autoDispose<List<ReservationListModel>>((ref) async {
+  return ref.watch(customerProvider).checkOut();
+});
+
 final reservationDetails =
     FutureProvider.family<ReservationDetailsModel, int>((ref, id) async {
   return ApiServices().getReservationDetails(id);
+});
+final allPetProvider =
+    FutureProvider.autoDispose<List<AllPetModel>>((ref) async {
+  return ref.watch(customerProvider).getAllPet();
 });

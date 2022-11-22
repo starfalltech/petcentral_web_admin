@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:petcentral_web_admin/model/all_pet_model.dart';
 import 'package:petcentral_web_admin/model/customer_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:petcentral_web_admin/model/grooming_detail_model.dart';
@@ -157,6 +158,40 @@ class ApiServices {
     return reservationListModelFromJson(data);
   }
 
+  Future<List<ReservationListModel>> checkIn() async {
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request('POST',
+        Uri.parse('https://api.petcentral.id/admin/reservations/hotel'));
+    request.body = json.encode({"branchId": 1, "status": "checked_in"});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    var data = await response.stream.bytesToString();
+    if (response.statusCode == 200) {
+      debugPrint(data);
+    } else {
+      debugPrint(response.reasonPhrase);
+    }
+    return reservationListModelFromJson(data);
+  }
+
+  Future<List<ReservationListModel>> checkOut() async {
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request('POST',
+        Uri.parse('https://api.petcentral.id/admin/reservations/hotel'));
+    request.body = json.encode({"branchId": 1, "status": "checked_out"});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    var data = await response.stream.bytesToString();
+    if (response.statusCode == 200) {
+      debugPrint(data);
+    } else {
+      debugPrint(response.reasonPhrase);
+    }
+    return reservationListModelFromJson(data);
+  }
+
   Future<ReservationDetailsModel> getReservationDetails(int id) async {
     var headers = {'Content-Type': 'application/json'};
     var request = http.Request('POST',
@@ -172,6 +207,21 @@ class ApiServices {
       debugPrint(response.reasonPhrase);
     }
     return reservationDetailsModelFromJson(data);
+  }
+
+//! AllPet Section
+  Future<List<AllPetModel>> getAllPet() async {
+    var request = http.Request(
+        'GET', Uri.parse('https://api.petcentral.id/admin/customer/pets'));
+
+    http.StreamedResponse response = await request.send();
+    var data = await response.stream.bytesToString();
+    if (response.statusCode == 200) {
+      print(data);
+    } else {
+      print(response.reasonPhrase);
+    }
+    return allPetModelFromJson(data);
   }
 }
 

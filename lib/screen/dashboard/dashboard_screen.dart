@@ -100,8 +100,8 @@ class DrawerSidebarX extends StatelessWidget {
           label: 'Chatting',
         ),
         const SidebarXItem(
-          icon: Icons.report_outlined,
-          label: 'Report',
+          icon: Icons.pets_rounded,
+          label: 'All Pet',
         ),
         const SidebarXItem(
           icon: Icons.design_services,

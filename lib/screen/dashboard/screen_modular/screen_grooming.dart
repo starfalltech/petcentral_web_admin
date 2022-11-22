@@ -1,12 +1,13 @@
 import 'dart:convert';
-
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:material_dialogs/material_dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_button.dart';
+import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 import 'package:petcentral_web_admin/const/colors_const.dart';
 import 'package:petcentral_web_admin/main.dart';
 import 'package:petcentral_web_admin/provider/provider_services.dart';
@@ -27,7 +28,6 @@ class GroomingReservationScreen extends HookConsumerWidget {
     final groomingDataApproved = ref.watch(groomingListApproved);
     final groomingDataRejected = ref.watch(groomingListRejected);
 
-    final _controller = SidebarXController(selectedIndex: 0, extended: true);
     final _key = GlobalKey<ScaffoldState>();
 
     Future<void> acceptGrooming(int resId) async {
@@ -44,7 +44,9 @@ class GroomingReservationScreen extends HookConsumerWidget {
 
       if (response.statusCode == 200) {
         debugPrint(await response.stream.bytesToString());
-        Get.offAll(DashBoardScreenX(keys: _key, controller: _controller));
+        Get.offAll(DashBoardScreenX(
+            keys: _key,
+            controller: SidebarXController(selectedIndex: 0, extended: true)));
         // ref.refresh(groomingDataPending);
         Get.snackbar(
           'Success',
@@ -77,7 +79,9 @@ class GroomingReservationScreen extends HookConsumerWidget {
 
       if (response.statusCode == 200) {
         debugPrint(await response.stream.bytesToString());
-        Get.offAll(DashBoardScreenX(keys: _key, controller: _controller));
+        Get.offAll(DashBoardScreenX(
+            keys: _key,
+            controller: SidebarXController(selectedIndex: 0, extended: true)));
         Get.snackbar(
           'Success',
           'Update Success',
@@ -95,12 +99,46 @@ class GroomingReservationScreen extends HookConsumerWidget {
       }
     }
 
+    Future<void> updatePaymentFinish(int id) async {
+      var headers = {'Content-Type': 'application/json'};
+      var request = http.Request(
+          'PUT',
+          Uri.parse(
+              'https://api.petcentral.id/admin/reservation/grooming/update-payment-status'));
+      request.body =
+          json.encode({"reservationId": id, "paymentStatus": "complete"});
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        debugPrint(await response.stream.bytesToString());
+        Get.offAll(DashBoardScreenX(
+            keys: _key,
+            controller: SidebarXController(selectedIndex: 0, extended: true)));
+        Get.snackbar(
+          'Success',
+          'Update Payment Success',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      } else {
+        debugPrint(response.reasonPhrase);
+        Get.snackbar(
+          'Error',
+          'Please try again',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+    }
+
     return Scaffold(
       body: Column(
         children: [
           SizedBox(
             width: 80.w,
-            height: 50,
+            height: 80,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -117,7 +155,7 @@ class GroomingReservationScreen extends HookConsumerWidget {
                             : accentCanvasColor,
                         borderRadius: BorderRadius.circular(20)),
                     width: 20.w,
-                    height: 30,
+                    height: 50,
                     child: Center(
                       child: Text(
                         'Pending',
@@ -143,7 +181,7 @@ class GroomingReservationScreen extends HookConsumerWidget {
                               : accentCanvasColor,
                           borderRadius: BorderRadius.circular(20)),
                       width: 20.w,
-                      height: 30,
+                      height: 50,
                       child: Center(
                         child: Text(
                           'Approve',
@@ -168,7 +206,7 @@ class GroomingReservationScreen extends HookConsumerWidget {
                               : accentCanvasColor,
                           borderRadius: BorderRadius.circular(20)),
                       width: 20.w,
-                      height: 30,
+                      height: 50,
                       child: Center(
                         child: Text(
                           'Rejected',
@@ -366,17 +404,20 @@ class GroomingReservationScreen extends HookConsumerWidget {
                                     ),
                                   ),
                                   const Gap(20),
-                                  GestureDetector(
-                                    onTap: () {
-                                      acceptGrooming(data[index].id!.toInt());
-                                    },
-                                    child: Container(
-                                      width: 6.w,
-                                      height: 5.h,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.green,
+                                  SizedBox(
+                                    width: 6.w,
+                                    height: 5.h,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        backgroundColor: Colors.green,
                                       ),
+                                      onPressed: () {
+                                        acceptGrooming(data[index].id!.toInt());
+                                      },
                                       child: Center(
                                         child: Text(
                                           'Accept',
@@ -557,15 +598,6 @@ class GroomingReservationScreen extends HookConsumerWidget {
                                               fontSize: 11,
                                             ),
                                           ),
-
-                                          // Text(
-                                          //   '${data[index].pet!.gender}',
-                                          //   style: GoogleFonts.livvic(
-                                          //     color: Colors.white,
-                                          //     fontWeight: FontWeight.w500,
-                                          //     fontSize: 11,
-                                          //   ),
-                                          // ),
                                         ],
                                       ),
                                     ),
@@ -579,7 +611,8 @@ class GroomingReservationScreen extends HookConsumerWidget {
                                     height: 5.h,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Color.fromARGB(255, 0, 103, 151),
+                                      color: const Color.fromARGB(
+                                          255, 0, 103, 151),
                                     ),
                                     child: Center(
                                       child: Text(
@@ -588,6 +621,79 @@ class GroomingReservationScreen extends HookConsumerWidget {
                                           fontSize: 12,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const Gap(20),
+                                  Container(
+                                    width: 10.w,
+                                    height: 5.h,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: const Color.fromARGB(
+                                          255, 0, 103, 151),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Payment : ${data[index].paymentStatus}',
+                                        style: GoogleFonts.livvic(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const Gap(20),
+                                  InkWell(
+                                    onTap: () {
+                                      Dialogs.bottomMaterialDialog(
+                                          msg: 'Please Choose The Payment',
+                                          title: 'Payment Update',
+                                          context: context,
+                                          actions: [
+                                            IconsOutlineButton(
+                                              onPressed: () {
+                                                Get.back();
+                                              },
+                                              text: 'Cancel',
+                                              iconData: Icons.cancel_outlined,
+                                              textStyle: const TextStyle(
+                                                  color: Colors.grey),
+                                              iconColor: Colors.grey,
+                                            ),
+                                            IconsButton(
+                                              onPressed: () {
+                                                updatePaymentFinish(
+                                                    data[index].id!);
+                                              },
+                                              text: 'Payment 100% (completed)',
+                                              iconData:
+                                                  Icons.monetization_on_rounded,
+                                              color: Colors.green,
+                                              textStyle: const TextStyle(
+                                                  color: Colors.white),
+                                              iconColor: Colors.white,
+                                            ),
+                                          ]);
+                                    },
+                                    child: Container(
+                                      width: 10.w,
+                                      height: 5.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.blue,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'Update \nPayment',
+                                          textAlign: TextAlign.center,
+                                          style: GoogleFonts.livvic(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -766,15 +872,6 @@ class GroomingReservationScreen extends HookConsumerWidget {
                                               fontSize: 11,
                                             ),
                                           ),
-
-                                          // Text(
-                                          //   '${data[index].pet!.gender}',
-                                          //   style: GoogleFonts.livvic(
-                                          //     color: Colors.white,
-                                          //     fontWeight: FontWeight.w500,
-                                          //     fontSize: 11,
-                                          //   ),
-                                          // ),
                                         ],
                                       ),
                                     ),

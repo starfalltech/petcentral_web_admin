@@ -15,10 +15,12 @@ class ReservationListModel {
   ReservationListModel({
     this.id,
     this.numberOfPets,
-    this.minCost,
-    this.maxCost,
+    this.cost,
     this.dateCheckIn,
     this.dateCheckOut,
+    this.checkInAt,
+    this.checkOutAt,
+    this.paymentStatus,
     this.status,
     this.createdAt,
     this.updatedAt,
@@ -28,10 +30,12 @@ class ReservationListModel {
 
   final int? id;
   final int? numberOfPets;
-  final int? minCost;
-  final int? maxCost;
+  final int? cost;
   final String? dateCheckIn;
   final String? dateCheckOut;
+  final DateTime? checkInAt;
+  final DateTime? checkOutAt;
+  final String? paymentStatus;
   final String? status;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -42,10 +46,16 @@ class ReservationListModel {
       ReservationListModel(
         id: json["id"],
         numberOfPets: json["numberOfPets"],
-        minCost: json["minCost"],
-        maxCost: json["maxCost"],
+        cost: json["cost"],
         dateCheckIn: json["dateCheckIn"],
         dateCheckOut: json["dateCheckOut"],
+        checkInAt: json["checkInAt"] == null
+            ? null
+            : DateTime.parse(json["checkInAt"]),
+        checkOutAt: json["checkOutAt"] == null
+            ? null
+            : DateTime.parse(json["checkOutAt"]),
+        paymentStatus: json["paymentStatus"],
         status: json["status"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -56,10 +66,12 @@ class ReservationListModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "numberOfPets": numberOfPets,
-        "minCost": minCost,
-        "maxCost": maxCost,
+        "cost": cost,
         "dateCheckIn": dateCheckIn,
         "dateCheckOut": dateCheckOut,
+        "checkInAt": checkInAt == null ? null : checkInAt!.toIso8601String(),
+        "checkOutAt": checkOutAt == null ? null : checkOutAt!.toIso8601String(),
+        "paymentStatus": paymentStatus,
         "status": status,
         "createdAt": createdAt!.toIso8601String(),
         "updatedAt": updatedAt!.toIso8601String(),
