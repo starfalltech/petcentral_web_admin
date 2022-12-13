@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-class AppbarLoginWidget extends StatelessWidget {
+class AppbarLoginWidget extends StatelessWidget with PreferredSizeWidget{
   const AppbarLoginWidget({
     Key? key,
   }) : super(key: key);
@@ -39,4 +39,8 @@ class AppbarLoginWidget extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => const Size(double.infinity, 80);
 }

@@ -1,15 +1,20 @@
-import 'package:go_router/go_router.dart';
-import 'package:petcentral_web_admin/features/auth/presentation/screens/login_page.dart';
+
+import 'package:flutter/cupertino.dart';
+import 'package:petcentral_web_admin/features/splash/splash_page.dart';
+import 'package:petcentral_web_admin/screens.dart';
 
 class AppRouters {
-  static const String login = "/";
+  static const String login = "/login";
+  static const String forgotPassword = "/forgot-password";
+  static const String resetPassword = "/reset-password";
+  static const String dashboard = "/dashboard";
+  static const String splash = "/";
 
-  final router = GoRouter(
-    routes: [
-      GoRoute(
-        path: login,
-        builder: (context, state) => const LoginPage(),
-      )
-    ],
-  );
+  final Map<String, Widget Function(BuildContext)> router = {
+    splash: (context) => const SplashPage(),
+    login: (context) => const LoginPage(),
+    forgotPassword: (context) => const ForgotPasswordPage(),
+    resetPassword: (context) => const ResetPasswordPage(),
+    dashboard: (context) => const DashBoardPage(),
+  };
 }
